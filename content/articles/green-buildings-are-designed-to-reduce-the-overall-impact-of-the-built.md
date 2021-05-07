@@ -7,8 +7,6 @@ author:
   - Pankaj Sarkar
 featureImage: /uploads/shot-1.png
 ---
-<!--StartFragment-->
-
 **What Makes a Building Green?**
 
 Following examples can be considered for green buildings:
@@ -19,5 +17,3 @@ Following examples can be considered for green buildings:
 * *A green building is a structure that is environmentally responsible and resource-efficient throughout its life-cycle. These objectives expand and complement the classical building design concerns of economy, utility. Durability and comfort.*
 
 ![ALT](/uploads/shot-1.png "Title of Image")
-
-<!--EndFragment-->
