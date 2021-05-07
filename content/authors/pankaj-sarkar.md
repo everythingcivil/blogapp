@@ -1,6 +1,6 @@
 ---
 name: Pankaj Sarkar
-image: https://via.placeholder.com/150
+image: /uploads/pankaj-avatar.jpg
+linkedin: https://in.linkedin.com/in/sarkarpankaj
+description: Creator and founder of Everything Civil.
 ---
-
-All about the Awake Nuxt Template

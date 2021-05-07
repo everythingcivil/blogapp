@@ -9,7 +9,11 @@
 <script>
 export default {
   async asyncData({ $content }) {
-    const articles = await $content('blog').fetch()
+    const articles = await $content('articles')
+      .only(['title', 'date', 'description', 'featureImage', 'slug'])
+      .sortBy('date', 'desc')
+      .limit(10)
+      .fetch()
 
     return {
       articles,
