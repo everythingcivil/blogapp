@@ -2,8 +2,9 @@ backend:
   name: git-gateway
   branch: main
 
-media_folder: static/img
-public_folder: /img
+media_folder: 'assets/uploads'
+public_folder: /uploads
+publish_mode: editorial_workflow
 
 collections:
   - name: 'blog'
@@ -11,11 +12,32 @@ collections:
     folder: 'content/blog'
     format: 'frontmatter'
     create: true
-    slug: '{{year}}-{{month}}-{{day}}-{{slug}}'
+    slug: '{{slug}}'
     editor:
       preview: false
     fields:
       - { label: 'Title', name: 'title', widget: 'string' }
       - { label: 'Publish Date', name: 'date', widget: 'datetime' }
       - { label: 'Description', name: 'description', widget: 'string' }
+      - {
+          label: 'Author',
+          name: 'author',
+          widget: 'relation',
+          collection: 'authors',
+          searchFields: ['name'],
+          valueField: 'name',
+          multiple: true,
+        }
+      - { label: 'Featured Image', name: 'featureImage', widget: 'image' }
       - { label: 'Body', name: 'body', widget: 'markdown' }
+  - name: 'authors'
+    label: 'Authors'
+    folder: 'content/author'
+    create: true
+    slug: '{{slug}}'
+    identifier_field: name
+    fields:
+      - { label: 'Name', name: 'name', widget: 'string' }
+      - { label: 'Image', name: 'image', widget: 'image' }
+      - { label: 'Linkedin link', name: 'linkedin', widget: 'string' }
+      - { label: 'Description', name: 'description', widget: 'markdown' }
