@@ -19,11 +19,13 @@
         </NuxtLink>
 
         <a
+          :aria-expanded="isActive"
+          :class="{ 'is-active': isActive }"
           role="button"
           class="navbar-burger"
           aria-label="menu"
-          aria-expanded="false"
-          data-target="navbarToggle"
+          data-target="collapse"
+          @click="isActive = !isActive"
         >
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
@@ -31,7 +33,7 @@
         </a>
       </div>
 
-      <div id="navbarToggle" class="navbar-menu">
+      <div id="collapse" :class="{ 'is-active': isActive }" class="navbar-menu">
         <div class="navbar-end">
           <div class="navbar-item has-dropdown is-hoverable">
             <a class="navbar-link"> Blog </a>
@@ -56,6 +58,12 @@ export default {
     htmlAttrs: {
       class: 'has-navbar-fixed-top',
     },
+  },
+  data() {
+    return {
+      isActive: false,
+      showNavbar: true,
+    }
   },
   beforeMount() {
     window.addEventListener('scroll', this.handleScroll)
@@ -149,10 +157,6 @@ export default {
 </script>
 
 <style>
-body {
-  font-family: 'Open Sans', sans-serif !important;
-}
-
 .typewrite {
   color: #3273dc;
 }
