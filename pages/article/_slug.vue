@@ -10,6 +10,9 @@
 </template>
 
 <script>
+import global from '@/utils/global'
+import getSiteMeta from '@/utils/getSiteMeta'
+
 export default {
   async asyncData({ $content, params }) {
     const article = await $content('articles', params.slug).fetch()
@@ -22,33 +25,53 @@ export default {
   },
   head() {
     return {
-      title: this.article.title,
+      title: this.article.title + ' | ' + global.siteName,
       meta: [
+        ...this.meta,
         {
-          hid: 'description',
-          name: 'description',
-          content: this.article.description,
-        },
-        // Open Graph
-        { hid: 'og:title', property: 'og:title', content: this.article.title },
-        {
-          hid: 'og:description',
-          property: 'og:description',
-          content: this.article.description,
-        },
-        // Twitter Card
-        {
-          hid: 'twitter:title',
-          name: 'twitter:title',
-          content: this.article.title,
+          property: 'article:published_time',
+          content: this.article.date,
         },
         {
-          hid: 'twitter:description',
-          name: 'twitter:description',
-          content: this.article.description,
+          property: 'article:modified_time',
+          content: this.article.updatedAt,
+        },
+        {
+          property: 'article:category',
+          content: this.article.category
+            ? this.article.category.toString()
+            : '',
+        },
+        { name: 'twitter:label1', content: 'Written by' },
+        { name: 'twitter:data1', content: global.author || '' },
+        { name: 'twitter:label2', content: 'Filed under' },
+        {
+          name: 'twitter:data2',
+          content: this.article.category
+            ? this.article.category.toString()
+            : '',
+        },
+      ],
+      link: [
+        {
+          hid: 'canonical',
+          rel: 'canonical',
+          href: `${this.$config.baseUrl}/articles/${this.$route.params.slug}`,
         },
       ],
     }
+  },
+  computed: {
+    meta() {
+      const metaData = {
+        type: 'article',
+        title: this.article.title,
+        description: this.article.description,
+        url: `${this.$config.baseUrl}/articles/${this.$route.params.slug}`,
+        mainImage: this.article.featureImage,
+      }
+      return getSiteMeta(metaData)
+    },
   },
   methods: {
     formatDate(dateString) {

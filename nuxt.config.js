@@ -1,14 +1,20 @@
+import global from './utils/global'
+import getSiteMeta from './utils/getSiteMeta'
+const meta = getSiteMeta()
+
 export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'blogapp',
+    title: global.siteTitle,
     htmlAttrs: {
       lang: 'en',
     },
-    meta: [{
+    meta: [
+      ...meta,
+      {
         charset: 'utf-8'
       },
       {
@@ -18,18 +24,24 @@ export default {
       {
         hid: 'description',
         name: 'description',
-        content: ''
+        content: global.siteDesc || ''
       },
     ],
     link: [{
-      rel: 'icon',
-      type: 'image/x-icon',
-      href: '/favicon.ico'
-    }],
+        rel: 'icon',
+        type: 'image/x-icon',
+        href: '/favicon.ico'
+      },
+      {
+        hid: 'canonical',
+        rel: 'canonical',
+        href: global.siteUrl,
+      },
+    ],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [],
+  css: ['bulma/css/bulma.min.css', '~/assets/css/main.css'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [],
@@ -47,7 +59,7 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
-    '@nuxt/content'
+    '@nuxt/content',
   ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
@@ -59,5 +71,8 @@ export default {
         }]
       ]
     }
+  },
+  publicRuntimeConfig: {
+    baseUrl: process.env.BASE_URL || 'http://localhost:3000',
   },
 }

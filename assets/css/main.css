@@ -1,0 +1,7 @@
+/* Vi */
+@font-face {
+  font-family: VisbyRoundCF;
+  font-style: bold;
+  font-weight: 700;
+  src: url(../fonts/VisbyRoundCF-Bold.woff2) format("woff2");
+}
