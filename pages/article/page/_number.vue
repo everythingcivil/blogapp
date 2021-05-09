@@ -1,19 +1,38 @@
 <template>
   <div>
-    <li v-for="item of articles" :key="item.slug">
-      <NuxtLink :to="/categories/ + item.slug">{{ item.title }}</NuxtLink>
-    </li>
-    <section id="prev-next">
-      <nuxt-link :to="prevLink">Prev page</nuxt-link>
-      <nuxt-link v-if="nextPage" :to="`/article/page/${pageNo + 1}`"
-        >Next page</nuxt-link
-      >
+    <section class="section">
+      <div class="container">
+        <div class="columns is-multiline">
+          <div class="column is-8">
+            <ArticleCard :articles="articles" />
+            <nav class="pagination" role="navigation" aria-label="pagination">
+              <NuxtLink :to="prevLink" class="pagination-previous"
+                >Previous</NuxtLink
+              >
+              <NuxtLink
+                v-if="nextPage"
+                :to="`/article/page/${pageNo + 1}`"
+                class="pagination-next"
+                >Next page</NuxtLink
+              >
+            </nav>
+          </div>
+          <PopularPanel />
+        </div>
+      </div>
     </section>
   </div>
 </template>
 
 <script>
+import ArticleCard from '@/components/articles/ArticleCard'
+import PopularPanel from '@/components/articles/PopularPanel'
+
 export default {
+  components: {
+    ArticleCard,
+    PopularPanel,
+  },
   async asyncData({ $content, params, error }) {
     const numberOfArticles = 5
     const pageNo = parseInt(params.number)

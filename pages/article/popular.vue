@@ -6,7 +6,7 @@
           <div class="column is-8">
             <ArticleCard :articles="articles" />
           </div>
-          <PopularPanel />
+          <LatestPanel />
         </div>
       </div>
     </section>
@@ -15,21 +15,20 @@
 
 <script>
 import ArticleCard from '@/components/articles/ArticleCard'
-import PopularPanel from '@/components/articles/PopularPanel'
+import LatestPanel from '@/components/articles/LatestPanel'
+
 export default {
   components: {
-    PopularPanel,
     ArticleCard,
+    LatestPanel,
   },
-  async asyncData({ $content, params }) {
-    const categories = await $content('categories', params.slug).fetch()
+  async asyncData({ $content }) {
     const articles = await $content('articles')
-      .where({ category: { $contains: categories.name } })
+      .where({ isPopular: true })
+      .only(['title', 'date', 'description', 'featureImage', 'slug'])
+      .sortBy('date', 'asc')
       .fetch()
-    return {
-      categories,
-      articles,
-    }
+    return { articles }
   },
 }
 </script>

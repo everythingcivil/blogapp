@@ -1,19 +1,18 @@
 <template>
   <div>
-    <h2>{{ article.title }}</h2>
-    <h6>{{ formatDate(article.date) }}</h6>
-    <h6>{{ article.description }}</h6>
-    <img :src="article.featureImage" alt="" />
-    <h6>{{ author.name }}</h6>
-    <nuxt-content :document="article" />
+    <ArticleView :article="article" :author="author" />
   </div>
 </template>
 
 <script>
 import global from '@/utils/global'
 import getSiteMeta from '@/utils/getSiteMeta'
+import ArticleView from '@/components/articles/ArticleView'
 
 export default {
+  components: {
+    ArticleView,
+  },
   async asyncData({ $content, params }) {
     const article = await $content('articles', params.slug).fetch()
     const authorname = article.author[0].toLowerCase().split(' ').join('-')
