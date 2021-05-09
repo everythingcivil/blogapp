@@ -280,4 +280,9 @@ export default {
   color: #3273dc;
   font-weight: 600;
 }
+@media screen and (max-width: 768px) {
+  .section {
+    padding: 3em 0;
+  }
+}
 </style>
