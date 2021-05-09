@@ -18,7 +18,6 @@
               <span class="wrap"></span>
             </span>
           </NuxtLink>
-
           <a
             :aria-expanded="isActive"
             :class="{ 'is-active': isActive }"
@@ -41,20 +40,21 @@
               class="navbar-item has-dropdown is-hoverable"
             >
               <a class="navbar-link"> Categories </a>
-              <div class="navbar-dropdown">
+              <div v-if="showDropdown" class="navbar-dropdown">
                 <NuxtLink
                   v-for="item of category"
                   :key="item.slug"
                   :to="/categories/ + item.slug"
                   class="navbar-item"
-                  >{{ item.name }}</NuxtLink
                 >
+                  {{ item.name }}
+                </NuxtLink>
               </div>
             </div>
             <NuxtLink class="navbar-item" to="/article/popular">
               Popular Articles
             </NuxtLink>
-            <div class="buttons search-button">
+            <div class="buttons search-button navbar-item">
               <p class="control">
                 <a class="button" @click="showSearchModal = true">
                   <span class="icon">
@@ -70,7 +70,6 @@
         </div>
       </div>
     </nav>
-
     <SearchBarModal
       v-if="showSearchModal"
       @close="showSearchModal = false"
@@ -217,7 +216,6 @@ export default {
       this.routeChange = true
       this.showDropdown = false
       this.showSearchModal = false
-      this.isActive = false
     },
   },
 }

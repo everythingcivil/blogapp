@@ -1,8 +1,8 @@
 <template>
   <div>
-    <div class="modal is-active">
-      <div class="modal-background"></div>
-      <div class="modal-card mt-6">
+    <div id="searchModal" class="modal is-active">
+      <div class="modal-background" @click="$emit('close')"></div>
+      <div id="modal-card1" class="modal-card mt-6">
         <section class="modal-card-body">
           <div class="field">
             <p class="control has-icons-left">
@@ -19,12 +19,9 @@
             </p>
           </div>
           <div>
-            <div v-if="notSearched" class="has-text-centered py-5">
-              <span class="is-size-6 has-text-weight-light is-light">
-                No recent searches
-              </span>
+            <div v-if="loading" class="loading-page">
+              <p>Loading...</p>
             </div>
-
             <ul v-if="articles.length">
               <li v-for="article of articles" :key="article.slug" class="py-1">
                 <NuxtLink :to="/article/ + article.slug">
@@ -38,12 +35,19 @@
                 </NuxtLink>
               </li>
             </ul>
+            <ul v-else>
+              <li>
+                <div class="has-text-centered py-5">
+                  <span class="is-size-6 has-text-weight-light is-light">
+                    No result found/ No recent searches
+                  </span>
+                </div>
+              </li>
+            </ul>
           </div>
         </section>
         <footer class="modal-card-foot">
-          <button class="button is-small" @click="$emit('close')">
-            Cancel
-          </button>
+          <button class="button" @click="$emit('close')">Close search</button>
         </footer>
       </div>
     </div>
@@ -52,6 +56,7 @@
 
 <script>
 import SearchIcon from '@/components/svg/SearchIcon'
+
 export default {
   name: 'SearchBarModal',
   components: {
@@ -60,22 +65,28 @@ export default {
   data() {
     return {
       searchQuery: '',
-      notSearched: true,
       articles: [],
+      loading: false,
     }
   },
   watch: {
     async searchQuery(searchQuery) {
       if (!searchQuery) {
         this.articles = []
-        this.notSearched = true
         return
       }
       this.articles = await this.$content('articles')
         .limit(6)
         .search(searchQuery)
         .fetch()
-      this.notSearched = false
+    },
+  },
+  methods: {
+    start() {
+      this.loading = true
+    },
+    finish() {
+      this.loading = false
     },
   },
 }

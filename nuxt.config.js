@@ -1,11 +1,14 @@
 import global from './utils/global'
+import getRoutes from './utils/getRoutes'
 import getSiteMeta from './utils/getSiteMeta'
 const meta = getSiteMeta()
 
 export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
-
+  loading: {
+    color: '#3273dc',
+  },
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: global.siteTitle,
@@ -60,6 +63,7 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     '@nuxt/content',
+    '@nuxtjs/sitemap',
   ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
@@ -72,6 +76,14 @@ export default {
       ]
     }
   },
+  // Sitemap
+  sitemap: {
+    hostname: global.siteUrl,
+    routes() {
+      return getRoutes();
+    },
+  },
+
   publicRuntimeConfig: {
     baseUrl: process.env.BASE_URL || 'http://localhost:3000',
   },
