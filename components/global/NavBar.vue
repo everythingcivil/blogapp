@@ -41,10 +41,7 @@
               class="navbar-item has-dropdown is-hoverable"
             >
               <a class="navbar-link"> Categories </a>
-              <div
-                class="navbar-dropdown"
-                :style="{ display: showDropdown ? 'block' : 'none' }"
-              >
+              <div class="navbar-dropdown">
                 <NuxtLink
                   v-for="item of category"
                   :key="item.slug"
@@ -220,6 +217,7 @@ export default {
       this.routeChange = true
       this.showDropdown = false
       this.showSearchModal = false
+      this.isActive = false
     },
   },
 }

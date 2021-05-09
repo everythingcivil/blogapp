@@ -1,5 +1,5 @@
 <template>
-  <section class="section">
+  <section class="section mb-5">
     <div
       class="article-cover"
       :style="{ backgroundImage: 'url(' + article.featureImage + ')' }"
