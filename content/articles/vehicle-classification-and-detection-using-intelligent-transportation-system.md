@@ -7,7 +7,7 @@ description: Identifying vehicle classification, and traffic load classification
   pedestrians, cars, trucks, busses, tramps, bicycles, etc.). Effectiveness in
   traffic planning, and road infrastructures maintenance could be improved by
   proper recognition and analysis of vehicles and traffic load.
-isPopular: false
+isPopular: true
 author:
   - Pankaj Sarkar
 featureImage: /uploads/its.jpg
