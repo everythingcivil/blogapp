@@ -38,7 +38,7 @@ export default {
     const pageNo = parseInt(params.number)
     const articleList = await $content('articles')
       .only(['title', 'date', 'description', 'featureImage', 'slug'])
-      .sortBy('date', 'asc')
+      .sortBy('date', 'desc')
       .limit(numberOfArticles)
       .skip((numberOfArticles - 1) * (pageNo - 1))
       .fetch()

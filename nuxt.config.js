@@ -64,6 +64,7 @@ export default {
   modules: [
     '@nuxt/content',
     '@nuxtjs/sitemap',
+    'nuxt-purgecss',
   ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

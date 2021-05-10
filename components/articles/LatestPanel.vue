@@ -42,7 +42,7 @@ export default {
     async fetchPosts() {
       return await this.$content('articles')
         .only(['title', 'date', 'slug'])
-        .sortBy('date', 'asc')
+        .sortBy('date', 'desc')
         .limit(6)
         .fetch()
     },

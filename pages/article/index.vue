@@ -40,7 +40,7 @@ export default {
     const numberOfArticles = 5
     const articleList = await $content('articles')
       .only(['title', 'date', 'description', 'featureImage', 'slug'])
-      .sortBy('date', 'asc')
+      .sortBy('date', 'desc')
       .limit(numberOfArticles)
       .fetch()
     const category = await $content('categories')

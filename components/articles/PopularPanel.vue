@@ -46,7 +46,7 @@ export default {
       return await this.$content('articles')
         .only(['title', 'date', 'slug'])
         .where({ isPopular: true })
-        .sortBy('date', 'asc')
+        .sortBy('date', 'desc')
         .limit(6)
         .fetch()
     },

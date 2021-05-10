@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div id="searchModal" class="modal is-active">
+    <div class="modal is-active">
       <div class="modal-background" @click="$emit('close')"></div>
       <div id="modal-card1" class="modal-card mt-6">
         <section class="modal-card-body">

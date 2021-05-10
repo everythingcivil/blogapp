@@ -19,11 +19,12 @@
             </span>
           </NuxtLink>
           <a
+            :aria-expanded="isActive"
+            :class="{ 'is-active': isActive }"
             role="button"
             class="navbar-burger"
             aria-label="menu"
-            aria-expanded="false"
-            @click="active = !active"
+            @click="isActive = !isActive"
           >
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
@@ -31,37 +32,31 @@
           </a>
         </div>
 
-        <div
-          :class="{
-            'navbar-menu': true,
-            'is-active': active,
-          }"
-        >
+        <div :class="{ 'is-active': isActive }" class="navbar-menu">
           <div class="navbar-end">
             <div
               @mouseover="toggleDropdown(true)"
               @mouseleave="toggleDropdown(false)"
-              class="has-dropdown is-hoverable navbar-item"
+              class="navbar-item has-dropdown is-hoverable"
             >
               <a class="navbar-link"> Categories </a>
               <div v-if="showDropdown" class="navbar-dropdown">
-                <li
-                  @click="active = false"
+                <NuxtLink
                   v-for="item of category"
                   :key="item.slug"
+                  :to="/categories/ + item.slug"
                   class="navbar-item"
+                  @click="isActive = false"
                 >
-                  <NuxtLink :to="/categories/ + item.slug">
-                    {{ item.name }}
-                  </NuxtLink>
-                </li>
+                  {{ item.name }}
+                </NuxtLink>
               </div>
             </div>
-            <li class="navbar-item" @click="active = false">
-              <NuxtLink to="/article/popular"> Popular Articles </NuxtLink>
-            </li>
+            <NuxtLink class="navbar-item" to="/article/popular">
+              Popular Articles
+            </NuxtLink>
             <div class="buttons search-button navbar-item">
-              <p class="control" @click="active = false">
+              <p class="control">
                 <a class="button" @click="showSearchModal = true">
                   <span class="icon">
                     <SearchIcon />
@@ -76,8 +71,12 @@
         </div>
       </div>
     </nav>
-
-    <SearchBarModal v-if="showSearchModal" @close="showSearchModal = false" />
+    <SearchBarModal
+      v-if="showSearchModal"
+      @close="showSearchModal = false"
+      @mouseover="toggleModal(true)"
+      @mouseleave="toggleModal(false)"
+    />
   </div>
 </template>
 
@@ -98,9 +97,11 @@ export default {
   },
   data() {
     return {
-      active: false,
-      showSearchModal: false,
+      isActive: false,
+      showNavbar: true,
+      routeChange: false,
       showDropdown: false,
+      showSearchModal: false,
       category: [],
     }
   },
@@ -184,22 +185,24 @@ export default {
     document.body.appendChild(css)
   },
   methods: {
+    toggleDropdown(payload) {
+      if (this.showDropdown !== payload) this.routeChange = false
+      if (!this.routeChange) {
+        this.showDropdown = payload
+      }
+    },
+    toggleModal(payload) {
+      if (this.showSearchModal !== payload) this.routeChange = false
+      if (!this.routeChange) {
+        this.showSearchModal = payload
+      }
+    },
     handleScroll() {
       let header = document.querySelector('.navbar')
       if (window.scrollY > 5) {
         header.classList.add('fixed')
       } else if (window.scrollY < 5) {
         header.classList.remove('fixed')
-      }
-    },
-    toggleDropdown(payload) {
-      if (window.innerWidth > 1023) {
-        if (this.showDropdown !== payload) this.routeChange = false
-        if (!this.routeChange) {
-          this.showDropdown = payload
-        }
-      } else {
-        this.showDropdown = true
       }
     },
     async fetchCategory() {
@@ -213,6 +216,8 @@ export default {
     $route() {
       this.routeChange = true
       this.showDropdown = false
+      this.showSearchModal = false
+      this.isActive = false
     },
   },
 }
@@ -224,13 +229,6 @@ export default {
 } */
 .search-button a {
   background-color: #f5f5f5;
-}
-.navbar-end li a {
-  color: #4a4a4a;
-}
-.navbar-end li:hover {
-  background-color: #fafafa;
-  color: #3273dc;
 }
 .search-button .button:hover {
   background: #fff;

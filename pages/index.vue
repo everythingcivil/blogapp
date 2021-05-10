@@ -7,7 +7,7 @@
             <ArticleCard :articles="articles" />
             <nav class="pagination" role="navigation" aria-label="pagination">
               <a class="pagination-previous" disabled>Previous</a>
-              <NuxtLink to="/article/page/2" class="pagination-next">
+              <NuxtLink to="/" class="pagination-next" disabled>
                 Next page
               </NuxtLink>
             </nav>
@@ -32,7 +32,7 @@ export default {
     const numberOfArticles = 5
     const articleList = await $content('articles')
       .only(['title', 'date', 'description', 'featureImage', 'slug'])
-      .sortBy('date', 'asc')
+      .sortBy('date', 'desc')
       .limit(numberOfArticles)
       .fetch()
     const nextPage = articleList.length === numberOfArticles
