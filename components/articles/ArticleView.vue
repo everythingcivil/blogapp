@@ -22,16 +22,18 @@
         </div>
         <header class="p-5">
           <div class="article-date caption">
-            {{ formatDate(article.date) }}
+            {{ getFormattedDate(article.date) }}
           </div>
-          <h1 class="h2 article-title mt-0">{{ article.title }}</h1>
+          <h1 class="h2 article-title mt-0 mr-6">{{ article.title }}</h1>
           <div class="divider-little"></div>
           <p class="article-summary mt-3">
             {{ article.description }}
           </p>
         </header>
         <div class="divider"></div>
-        <nuxt-content :document="article" class="p-5" />
+        <div class="article-content p-5">
+          <nuxt-content :document="article" />
+        </div>
         <div class="divider"></div>
         <div class="article-author is-flex is-align-items-center p-5">
           <div class="avatar mr-5">
@@ -82,9 +84,19 @@ export default {
     },
   },
   methods: {
-    formatDate(dateString) {
+    getFormattedDate(dateString) {
       const date = new Date(dateString)
-      return date.toLocaleDateString() || ''
+      const options = {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      }
+      return date
+        .toLocaleDateString('en-US', options)
+        .split(' ')
+        .slice(1)
+        .join(' ')
     },
   },
 }
@@ -187,7 +199,7 @@ export default {
   text-align: left;
   color: #0f0428;
   max-width: 930px;
-  line-height: 1.4;
+  line-height: 1.625;
   font-weight: 500;
 }
 
@@ -197,9 +209,9 @@ export default {
 
 .article-content {
   max-width: 930px;
-  line-height: 1.5rem;
-  color: #0f0428;
-  font-family: 'Open Sans', sans-serif;
+  font-size: 1.09rem;
+  line-height: 1.625;
+  color: rgba(74, 85, 104, 1);
 }
 
 .avatar img {

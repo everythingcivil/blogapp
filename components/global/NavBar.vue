@@ -219,9 +219,10 @@ export default {
 </script>
 
 <style>
-/* body {
-  background-color: #fafafa;
-} */
+body {
+  font-family: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica,
+    Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
+}
 .search-button a {
   background-color: #f5f5f5;
 }
@@ -286,5 +287,8 @@ export default {
   .section {
     padding: 3em 0;
   }
+}
+.panel-heading {
+  font-weight: 600;
 }
 </style>

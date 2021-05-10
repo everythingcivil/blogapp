@@ -1,13 +1,11 @@
 <template>
   <div class="column is-4">
     <article class="panel is-link">
-      <p class="panel-heading py-4" style="font-size: 0.97rem">
-        Latest Articles
-      </p>
+      <p class="panel-heading py-4">Latest Articles</p>
       <div v-for="item in popularArticles" :key="item.slug" class="panel-block">
         <NuxtLink :to="/article/ + item.slug" class="control">
           <div class="x-small">
-            {{ formatDate(item.date) }}
+            {{ getFormattedDate(item.date) }}
           </div>
           <div class="small">
             {{ item.title }}
@@ -35,9 +33,19 @@ export default {
     this.popularArticles = await this.fetchPosts()
   },
   methods: {
-    formatDate(dateString) {
+    getFormattedDate(dateString) {
       const date = new Date(dateString)
-      return date.toLocaleDateString() || ''
+      const options = {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      }
+      return date
+        .toLocaleDateString('en-US', options)
+        .split(' ')
+        .slice(1)
+        .join(' ')
     },
     async fetchPosts() {
       return await this.$content('articles')
@@ -52,11 +60,10 @@ export default {
 
 <style scoped>
 .small {
-  font-size: 0.83rem;
-  font-weight: 600;
+  font-size: 0.85rem;
+  font-weight: 500;
   color: #4a515b;
 }
-
 .x-small {
   font-size: 0.75rem;
   color: #a7aeb8;
@@ -68,7 +75,14 @@ export default {
 .panel-block:hover {
   background-color: #f2f6fc;
 }
+.panel-block:hover .small {
+  color: #3273dc;
+}
 .panel-block a {
   transition: 0.15s;
+}
+.panel-heading {
+  font-size: 1rem;
+  font-weight: 600;
 }
 </style>

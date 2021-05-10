@@ -12,14 +12,14 @@
         <div class="card-content p-3">
           <div class="media mb-3">
             <div class="media-content">
-              <p class="is-size-7 mb-2">{{ formatDate(item.date) }}</p>
+              <p class="is-size-7 mb-2">{{ getFormattedDate(item.date) }}</p>
               <NuxtLink :to="/article/ + item.slug">
                 <p class="article-title">{{ item.title }}</p>
               </NuxtLink>
             </div>
           </div>
 
-          <div class="content" style="font-size: 0.9em">
+          <div class="content">
             {{ item.description }}
           </div>
           <NuxtLink :to="/article/ + item.slug" class="button is-link">
@@ -46,9 +46,19 @@ export default {
     },
   },
   methods: {
-    formatDate(dateString) {
+    getFormattedDate(dateString) {
       const date = new Date(dateString)
-      return date.toLocaleDateString() || ''
+      const options = {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      }
+      return date
+        .toLocaleDateString('en-US', options)
+        .split(' ')
+        .slice(1)
+        .join(' ')
     },
   },
 }
@@ -71,8 +81,7 @@ svg {
 
 .article-title {
   font-weight: 600;
-  line-height: 1.125;
-  font-size: 1.15rem;
+  font-size: 1.2rem;
 }
 
 .article-title:hover {
