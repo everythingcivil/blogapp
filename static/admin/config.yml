@@ -31,6 +31,16 @@ collections:
           widget: 'string',
           required: true,
         }
+        - {
+          label: 'Category',
+          name: 'category',
+          widget: 'relation',
+          collection: 'categories',
+          searchFields: ['name'],
+          valueField: 'name',
+          multiple: false,
+          required: true,
+        }
       - {
           label: 'Popularity',
           name: 'isPopular',
@@ -45,7 +55,7 @@ collections:
           collection: 'authors',
           searchFields: ['name'],
           valueField: 'name',
-          multiple: true,
+          multiple: false,
           required: true,
         }
       - {
