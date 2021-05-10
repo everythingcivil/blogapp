@@ -23,7 +23,12 @@
               <p>Loading...</p>
             </div>
             <ul v-if="articles.length">
-              <li v-for="article of articles" :key="article.slug" class="py-1">
+              <li
+                v-for="article of articles"
+                :key="article.slug"
+                class="py-1"
+                @click="$emit('close')"
+              >
                 <NuxtLink :to="/article/ + article.slug">
                   <div class="card">
                     <header class="card-header">
