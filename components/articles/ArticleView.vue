@@ -12,37 +12,25 @@
         <div class="share">
           <ShareNetwork
             network="facebook"
-            :url="
-              'https://jovial-visvesvaraya-cc6f41.netlify.app/article/' +
-              article.slug
-            "
+            :url="`${this.$config.baseUrl}` + '/articles/' + article.slug"
             :title="article.title"
             :description="article.description"
-            quote="The hot reload is so fast it\'s near instant. - Evan You"
           >
             <FacebookIcon />
           </ShareNetwork>
           <ShareNetwork
             network="linkedin"
-            :url="
-              'https://jovial-visvesvaraya-cc6f41.netlify.app/article/' +
-              article.slug
-            "
+            :url="`${this.$config.baseUrl}` + '/articles/' + article.slug"
             :title="article.title"
             :description="article.description"
-            quote="The hot reload is so fast it\'s near instant. - Evan You"
           >
             <LinkedinIcon />
           </ShareNetwork>
           <ShareNetwork
             network="whatsapp"
-            :url="
-              'https://jovial-visvesvaraya-cc6f41.netlify.app/article/' +
-              article.slug
-            "
+            :url="`${this.$config.baseUrl}` + '/articles/' + article.slug"
             :title="article.title"
-            :description="article.description"
-            quote="The hot reload is so fast it\'s near instant. - Evan You"
+            description="Everying Civil Blog"
           >
             <WhatsappIcon />
           </ShareNetwork>

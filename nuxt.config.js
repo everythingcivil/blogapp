@@ -55,6 +55,22 @@ export default {
         href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap',
         media: 'print',
         onload: `this.media='all'`
+      },
+      {
+        rel: 'preconnect',
+        href: 'https://fonts.gstatic.com',
+        crossorigin: true
+      },
+      {
+        rel: 'preload',
+        as: 'style',
+        href: 'https://fonts.googleapis.com/css2?family=Varela+Round&display=swap'
+      },
+      {
+        rel: 'stylesheet',
+        href: 'https://fonts.googleapis.com/css2?family=Varela+Round&display=swap',
+        media: 'print',
+        onload: `this.media='all'`
       }
     ],
   },

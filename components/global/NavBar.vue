@@ -13,7 +13,7 @@
             <span
               class="typewrite"
               data-period="2000"
-              data-type='[ "Blog", "Structure", "Building", "Design" ]'
+              data-type='[ "Blog", "Engineering", "Structure"]'
             >
               <span class="wrap"></span>
             </span>
@@ -255,8 +255,9 @@ body {
 .navbar-brand {
   font-weight: 700;
   font-size: 1.3rem;
-  font-family: VisbyRoundCF, sans-serif;
+  font-family: 'Varela Round', sans-serif;
   font-style: bold;
+  letter-spacing: 1px;
 }
 
 .navbar-brand a:hover {
