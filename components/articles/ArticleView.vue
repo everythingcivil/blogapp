@@ -10,15 +10,43 @@
       <div class="article-margin"></div>
       <div class="article-wrapper">
         <div class="share">
-          <a href="">
+          <ShareNetwork
+            network="facebook"
+            :url="
+              'https://jovial-visvesvaraya-cc6f41.netlify.app/article/' +
+              article.slug
+            "
+            :title="article.title"
+            :description="article.description"
+            quote="The hot reload is so fast it\'s near instant. - Evan You"
+          >
             <FacebookIcon />
-          </a>
-          <a href="">
+          </ShareNetwork>
+          <ShareNetwork
+            network="linkedin"
+            :url="
+              'https://jovial-visvesvaraya-cc6f41.netlify.app/article/' +
+              article.slug
+            "
+            :title="article.title"
+            :description="article.description"
+            quote="The hot reload is so fast it\'s near instant. - Evan You"
+          >
             <LinkedinIcon />
-          </a>
-          <a href="">
-            <PrintIcon />
-          </a>
+          </ShareNetwork>
+          <ShareNetwork
+            network="whatsapp"
+            :url="
+              'https://jovial-visvesvaraya-cc6f41.netlify.app/article/' +
+              article.slug
+            "
+            :title="article.title"
+            :description="article.description"
+            quote="The hot reload is so fast it\'s near instant. - Evan You"
+          >
+            <WhatsappIcon />
+          </ShareNetwork>
+          <!-- <PrintIcon /> -->
         </div>
         <header class="p-5">
           <div class="article-date caption">
@@ -64,14 +92,16 @@
 <script>
 import FacebookIcon from '@/components/svg/FacebookIcon'
 import LinkedinIcon from '@/components/svg/LinkedinIcon'
-import PrintIcon from '@/components/svg/PrintIcon'
+import WhatsappIcon from '@/components/svg/WhatsappIcon'
+// import PrintIcon from '@/components/svg/PrintIcon'
 
 export default {
   name: 'ArticleView',
   components: {
     FacebookIcon,
     LinkedinIcon,
-    PrintIcon,
+    WhatsappIcon,
+    // PrintIcon,
   },
   props: {
     article: {

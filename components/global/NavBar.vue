@@ -185,7 +185,7 @@ export default {
   },
   methods: {
     handleScroll() {
-      let header = document.querySelector('.navbar')
+      const header = document.querySelector('.navbar')
       if (window.scrollY > 5) {
         header.classList.add('fixed')
       } else if (window.scrollY < 5) {

@@ -32,6 +32,11 @@ export default (meta) => {
       content: (meta && meta.mainImage) || global.mainImage,
     },
     {
+      hid: 'og:image:alt',
+      property: 'og:image:alt',
+      content: (meta && meta.title) || global.siteTitle,
+    },
+    {
       hid: 'twitter:url',
       name: 'twitter:url',
       content: (meta && meta.url) || global.siteUrl,

@@ -81,6 +81,7 @@ export default {
     '@nuxt/content',
     '@nuxtjs/sitemap',
     'nuxt-purgecss',
+    'vue-social-sharing/nuxt',
   ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
